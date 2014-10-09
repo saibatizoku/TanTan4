@@ -2,13 +2,13 @@
 
 describe('Controller: MainCtrl', function () {
 
-  // load the controller's module
+  // cargar módulo del controlador
   beforeEach(module('tanTan4App'));
 
   var MainCtrl,
     scope;
 
-  // Initialize the controller and a mock scope
+  // Inicializar controlador y scope falso
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {
@@ -16,7 +16,20 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('debe añadir una lista de tareas al scope', function () {
+    expect(scope.todos.length).toBe(0);
+  });
+
+  it('debe añadir items a la lista', function () {
+      scope.todo = 'Tarea 1';
+      scope.addTodo();
+      expect(scope.todos.length).toBe(1);
+  });
+
+  it('debe añadir y luego borrar item de la lista', function () {
+      scope.todo = 'Tarea 1';
+      scope.addTodo();
+      scope.removeTodo(0);
+      expect(scope.todos.length).toBe(0);
   });
 });
