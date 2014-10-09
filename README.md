@@ -13,9 +13,13 @@ Es necesario tener nodejs instalado en el sistema.
 Crear andamiaje de sitio con AngularJS y CornerCouch
 ----------------------------------------------------
 
-    mkdir TanTan4
+### Instalar clonando el repositorio:
+    git clone https://github.com/saibatizoku/TanTan4.git
     cd TanTan4
-    npm install generator-angular
-    yo angular
+    npm install
+    bower install
 
-    bower install CornerCouch --save
+
+### Una vez instaladas las dependencias, se puede ejecutar el servidor:
+    grunt serve
+
