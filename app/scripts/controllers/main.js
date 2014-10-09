@@ -16,4 +16,7 @@ angular.module('tanTan4App')
         $scope.todo = '';
     };
 
+    $scope.removeTodo = function (index) {
+        $scope.todos.splice(index, 1);
+    };
   });
