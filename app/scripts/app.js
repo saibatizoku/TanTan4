@@ -32,6 +32,10 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
+      .when('/calendario', {
+        templateUrl: 'views/calendario.html',
+        controller: 'CalendarioCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
