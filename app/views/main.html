@@ -1,25 +1,68 @@
 <div class="container">
-    <h2>Mis tareas</h2>
+    <div class="row">
+        <div class="col-xs-6" ng-controller="GranjasCtrl">
+            <h2>Mis granjas</h2>
+            <div class="alert alert-error" ng-show="errordata">{{ errordata | json }}</div>
+            <form name="formLogin" role="form" ng-submit="submitLogin()" class="form-inline">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="user" ng-model="loginUser" placeholder="Usuario" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="password" name="pass" ng-model="loginPass" placeholder="Contraseña" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <input type="submit" class="btn btn-primary" value="Añadir">
+                        </span>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <form name="formNewEntry" role="form" ng-submit="addEntry()">
+                <fieldset>
+                    <legend>Mis granjas</legend>
+                    <label>An alias of your own choice (required)</label>
+                    <input type="text" class="form-control" ng-model="newentry.alias" required>
+                    <label>Your mail address (not shown, but available via FireBug)</label>
+                    <input type="email" class="form-control" ng-model="newentry.email">
+                    <label>Your subject line (required)</label>
+                    <input type="text" class="form-control" ng-model="newentry.subject" required>
+                    <label>Your message</label>
+                    <textarea rows="5" class="form-control" ng-model="newentry.body"></textarea>
+                </fieldset>
+                <label>Submit your entry here</label>
+                <button type="submit" class="btn btn-primary" ng-disabled="formNewEntry.$invalid">Submit</button>
+            </form>
+        </div>
+        <div class="col-xs-6">
+            <h2>Mis tareas</h2>
 
-    <form role="form" ng-submit="addTodo()">
-        <div class="row">
-            <div class="input-group">
-                <input type="text" ng-model="todo" placeholder="Añadir tarea nueva" class="form-control">
+            <form role="form" ng-submit="addTodo()">
+                <div class="row">
+                    <div class="input-group">
+                        <input type="text" ng-model="todo" placeholder="Añadir tarea nueva" class="form-control">
+                        <span class="input-group-btn">
+                            <input type="submit" class="btn btn-primary" value="Añadir">
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+            <br>
+
+            <div ui-sortable ng-model="todos">
+                <p class="input-group" ng-repeat="todo in todos" style="padding:5px 10px;cursor: move;">
+                <input type="text" ng-model="todo" class="form-control">
                 <span class="input-group-btn">
-                    <input type="submit" class="btn btn-primary" value="Añadir">
+                    <button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Eliminar">X</button>
                 </span>
+                </p>
             </div>
         </div>
-    </form>
-
-    <br>
-
-    <div ui-sortable ng-model="todos">
-        <p class="input-group" ng-repeat="todo in todos" style="padding:5px 10px;cursor: move;">
-            <input type="text" ng-model="todo" class="form-control">
-            <span class="input-group-btn">
-                <button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Eliminar">X</button>
-            </span>
-        </p>
     </div>
 </div>

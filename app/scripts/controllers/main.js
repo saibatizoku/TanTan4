@@ -8,13 +8,7 @@
  * Controller of the tanTan4App
  */
 angular.module('tanTan4App')
-    .controller('MainCtrl', function ($scope, localStorageService, cornercouch) {
-
-        $scope.server = cornercouch('http://localhost:5984', 'GET');
-        $scope.server.session();
-        $scope.tt4db = $scope.server.getDB('tt4');
-        $scope.newentry = $scope.tt4db.newDoc();
-        $scope.tt4db.query('tt4', 'recent-items', { 'include_docs': true, descending: true, limit: 8 });
+    .controller('MainCtrl', function ($scope, localStorageService) {
 
         var todosInStore = localStorageService.get('todos');
         $scope.todos = todosInStore && todosInStore.split('\n') || [];
@@ -30,5 +24,21 @@ angular.module('tanTan4App')
 
         $scope.removeTodo = function (index) {
             $scope.todos.splice(index, 1);
+        };
+
+    })
+    .controller('GranjasCtrl', function ($scope, cornercouch) {
+
+        $scope.server = cornercouch('http://localhost:5984', 'GET');
+        $scope.server.session();
+        $scope.tt4db = $scope.server.getDB('tt4');
+
+        $scope.newentry = $scope.tt4db.newDoc();
+
+        $scope.tt4db.query('tt4', 'recent-items', { 'include_docs': true, descending: true, limit: 8 });
+
+        $scope.addEntry = function () {
+            $scope.newentry.save();
+            $scope.newentry = $scope.tt4db.newDoc();
         };
     });
