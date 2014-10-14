@@ -24,11 +24,11 @@
     <!-- Add your site or application content here -->
     <div class="container">
       <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ui-sref="inicio">Inicio</a></li>
-          <li><a ui-sref="calendario">Calendario</a></li>
-          <li><a ui-sref="about">Acerca de</a></li>
-          <li><a ui-sref="inicio">Contacto</a></li>
+        <ul class="nav nav-pills pull-right" ng-controller="NavCtrl">
+          <li ng-class="{active: isActive('/inicio')}"><a ui-sref="inicio">Inicio</a></li>
+          <li ng-class="{active: isActive('/calendario')}"><a ui-sref="calendario">Calendario</a></li>
+          <li ng-class="{active: isActive('/about')}"><a ui-sref="about">Acerca de</a></li>
+          <li ng-class="{active: isActive('/inicio')}"><a ui-sref="inicio">Contacto</a></li>
         </ul>
         <h3 class="text-muted">TanTán</h3>
       </div>
@@ -71,6 +71,7 @@
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/calendario.js"></script>
+        <script src="scripts/controllers/nav.js"></script>
         <!-- endbuild -->
 </body>
 </html>
