@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <h2 ng-show="server.userCtx.name">Mis granjas</h2>
+            <div class="alert alert-error" ng-show="errordata">{{ errordata | json }}</div>
+            <form name="formLogin" role="form" ng-submit="submitLogin()" class="form-inline" ng-show="!server.userCtx.name">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="user" ng-model="loginUser" placeholder="Usuario" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="password" name="pass" ng-model="loginPass" placeholder="Contraseña" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <input type="submit" class="btn btn-primary" value="Ingresar">
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+            <div class="alert alert-info" ng-show='server.userCtx.name'>
+                <h3>{{ server.userCtx.name }}</h3>
+                <button class='btn btn-error' ng-click='server.logout()'>Cerrar sesión</button>
+            </div>
+
+            <form name="formNewEntry" role="form" ng-submit="addEntry()" ng-show='server.userCtx.name'>
+                <fieldset>
+                    <legend>Mi granja</legend>
+                    <label>Nombre (requerido)</label>
+                    <input type="text" class="form-control" ng-model="newentry.name" required>
+                    <label>Notas</label>
+                    <textarea rows="5" class="form-control" ng-model="newentry.message"></textarea>
+                </fieldset>
+                <label>Guardar información</label>
+                <button type="submit" class="btn btn-primary" ng-disabled="formNewEntry.$invalid">Guardar</button>
+            </form>
+        </div>
+        <div class="col-xs-6" ng-show="server.userCtx.name">
+            <table class="table table-striped">
+                <thead>
+                    <tr><th>Nombre</th><th>Notas</th></tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in tt4db.rows" ng-click="rowClick($index)">
+                    <td class="col-xs-4">{{ row.doc.name }}</td>
+                    <td class="col-xs-8">{{ row.doc.message }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <ul class="pager">
+                <li><a ng-class="{muted: tt4db.queryActive}" ng-click="prevClick()" ng-show="tt4db.prevRows.length">Newer</a></li>
+                <li><a ng-class="{muted: tt4db.queryActive}"  ng-click="nextClick()" ng-show="tt4db.nextRow">Older</a></li>
+                <li><a ng-class="{muted: tt4db.queryActive}"  ng-click="moreClick()" ng-show="tt4db.nextRow">More...</a></li>
+            </ul>
+            <div class="alert alert-info" ng-show="detail._id">
+                <div class="navbar-inner">
+                    <a class="brand">Attachments:</a>
+                    <ul class="nav nav-pills" ng-repeat="(name,info) in detail._attachments">
+                        <li><a href="{{ detail.attachUri(name) }}" target="_blank">{{ name }}</a><span class="glyphicon glyphicon-remove" ng-click="detachClick(name)"></span></li>
+                    </ul>
+                </div>
+                <div class="btn btn-primary" style="float: right" ng-click="removeClick()">Remove</div>
+                <h4>{{detail.created_at}}</h4>
+                <p>_id = "{{detail._id}}", _rev ="{{detail._rev}}"</p>
+                <form name="formDetail" class="clearfix">
+                    <div class="btn btn-primary" style="float: right" ng-click="updateClick()" ng-show="formDetail.$dirty">Update</div>
+                    <input name="subject" type="text" class="col-xs-9" ng-model="detail.name" required>
+                    <textarea name="body" rows="5" class="col-xs-9" ng-model="detail.message"></textarea>
+                    <input type="file" id="upload" class="col-xs-9" multiple>
+                    <div class="btn btn-primary" style="float: right" ng-click="attachClick()" ng-hide="formDetail.$dirty">Attach</div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

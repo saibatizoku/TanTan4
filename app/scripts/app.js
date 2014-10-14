@@ -40,5 +40,10 @@ angular
           url: '/calendario',
           templateUrl: 'views/calendario.html',
           controller: 'CalendarioCtrl'
+      })
+      .state('granja', {
+          url: '/granja',
+          templateUrl: 'views/granja.html',
+          controller: 'GranjaCtrl'
       });
   });

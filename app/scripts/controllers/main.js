@@ -26,19 +26,4 @@ angular.module('tanTan4App')
             $scope.todos.splice(index, 1);
         };
 
-    })
-    .controller('GranjasCtrl', function ($scope, cornercouch) {
-
-        $scope.server = cornercouch('http://localhost:5984', 'GET');
-        $scope.server.session();
-        $scope.tt4db = $scope.server.getDB('tt4');
-
-        $scope.newentry = $scope.tt4db.newDoc();
-
-        $scope.tt4db.query('tt4', 'recent-items', { 'include_docs': true, descending: true, limit: 8 });
-
-        $scope.addEntry = function () {
-            $scope.newentry.save();
-            $scope.newentry = $scope.tt4db.newDoc();
-        };
     });
