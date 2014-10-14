@@ -13,7 +13,6 @@ angular
     'ngAnimate',
     'ngCookies',
     'ngResource',
-    'ngRoute',
     'ngSanitize',
     'ngTouch',
     'ui.sortable',
