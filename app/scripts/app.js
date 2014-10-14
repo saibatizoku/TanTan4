@@ -24,21 +24,22 @@ angular
   .config(['localStorageServiceProvider', function (localStorageServiceProvider) {
     localStorageServiceProvider.setPrefix('ls');
   }])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('inicio');
+    $stateProvider
+      .state('inicio', {
+          url: '/inicio',
+          templateUrl: 'views/main.html',
+          controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .state('about', {
+          url: '/about',
+          templateUrl: 'views/about.html',
+          controller: 'AboutCtrl'
       })
-      .when('/calendario', {
-        templateUrl: 'views/calendario.html',
-        controller: 'CalendarioCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
+      .state('calendario', {
+          url: '/calendario',
+          templateUrl: 'views/calendario.html',
+          controller: 'CalendarioCtrl'
       });
   });

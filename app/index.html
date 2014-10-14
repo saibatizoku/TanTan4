@@ -25,15 +25,15 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Inicio</a></li>
-          <li><a ng-href="#/calendario">Calendario</a></li>
-          <li><a ng-href="#/about">Acerca de</a></li>
-          <li><a ng-href="#">Contacto</a></li>
+          <li class="active"><a ui-sref="inicio">Inicio</a></li>
+          <li><a ui-sref="calendario">Calendario</a></li>
+          <li><a ui-sref="about">Acerca de</a></li>
+          <li><a ui-sref="inicio">Contacto</a></li>
         </ul>
         <h3 class="text-muted">TanTán</h3>
       </div>
 
-      <div ng-view=""></div>
+      <div ui-view=""></div>
 
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span></p>
